@@ -1,0 +1,34 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #101010; /* Domyślny kolor tła - ciemny szary */
+}
+
+form {
+    text-align: center;
+    background-color: #1a1a1a; /* Kolor tła formularza - ciemniejszy szary */
+    padding: 20px;
+    border-radius: 8px;
+}
+
+h1.main-heading {
+    color: #a8a8a8; /* Kolor tekstu głównego napisu - jasny szary */
+    font-family: Arial, sans-serif; /* Wybierz preferowaną czcionkę */
+    font-size: 36px; /* Rozmiar czcionki w pikselach */
+}
+
+input[type="submit"] {
+    background-color: #7289da; /* Kolor przycisku - Discord blue */
+    color: #fff; /* Kolor tekstu na przycisku - biały */
+    border: none;
+    padding: 15px 30px; /* Rozmiar przycisku */
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 18px; /* Rozmiar czcionki przycisku */
+}
+
+input[type="submit"]:hover {
+    background-color: #677bc4; /* Kolor przycisku po najechaniu myszką */
+}

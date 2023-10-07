@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Logowanie Discord</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="user-info" id="user-info" style="display: none;">
+        <img id="avatar" src="" alt="Avatar">
+        <p id="username"></p>
+    </div>
+    <form id="login-form" action="https://discord.com/api/oauth2/authorize" method="GET">
+        <h1 class="main-heading">Logowanie Discord</h1>
+        <input type="hidden" name="client_id" value="1146885724721905744">
+        <input type="hidden" name="redirect_uri" value="http://localhost:5000/callback">
+        <input type="hidden" name="response_type" value="code">
+        <input type="hidden" name="scope" value="identify guilds">
+        <input type="submit" value="Zaloguj się przez Discord">
+    </form>
+
+    <script>
+        const loginForm = document.getElementById("login-form");
+        const userInfo = document.getElementById("user-info");
+        const avatar = document.getElementById("avatar");
+        const username = document.getElementById("username");
+
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get("code");
+
+        if (code) {
+            // Użytkownik jest zalogowany
+            loginForm.style.display = "none";
+            userInfo.style.display = "block";
+
+            // Pobierz informacje o użytkowniku z Discord API
+            fetch("https://discord.com/api/v10/users/@me", {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${code}`
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                avatar.src = `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png`;
+                username.textContent = data.username;
+            })
+            .catch(error => {
+                console.error("Błąd podczas pobierania danych użytkownika:", error);
+            });
+        }
+    </script>
+</body>
+</html>
